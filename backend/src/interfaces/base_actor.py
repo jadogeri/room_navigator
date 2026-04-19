@@ -13,10 +13,11 @@ License: MIT
 from abc import ABC, abstractmethod
 from typing import Optional
 
+from backend.src.interfaces.game_object import GameObject
 from src.models.world.square import Square
 from src.schemas.interaction import InteractionResult
 
-class Actor(ABC):
+class Actor(GameObject, ABC):
     def __init__(self, name: str, health: int, speed: int, damage: int):
         self.name = name
         self.health = health
@@ -46,3 +47,5 @@ class Actor(ABC):
     # Concrete method to check if square is occupied
     def can_move_to(self, square: Square) -> bool:
         return square.occupant is None
+    
+    

@@ -16,6 +16,7 @@ from typing import Final
 INVALID_SQUARE_ERROR: Final[str] = "Value must be a Square or None"
 INVALID_ACTOR_ERROR: Final[str] = "Value must be an Actor or None"
 INVALID_OCCUPANT_ERROR: Final[str] = "Occupant must follow the Placeable protocol"
+INVALID_HEALING_AMOUNT_ERROR: Final[str] = "Healing amount cannot be negative."
 
 # Game Balance Defaults
 DEFAULT_PLAYER_HP: Final[int] = 100

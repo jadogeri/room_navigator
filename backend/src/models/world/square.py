@@ -1,13 +1,13 @@
 """
-Payment System Unit Tests
--------------------------
-Description: Validates the processing logic for various payment implementations
-             using a protocol-based interface.
+Square Module
+-------------
+Description: Represents a square in the game world, which can hold an occupant
+             and link to adjacent squares.
 
 Author: Joseph Adogeri
 Version: 1.0.0
 Since: 2023-10-27
-File: tests.py
+File: square.py
 License: MIT
 """
 from __future__ import annotations # MUST BE LINE 1
@@ -29,9 +29,8 @@ class Square:
         east: Optional[Square] = None, 
         west: Optional[Square] = None
     ):
-        self.id = generate()
+        self.id: str = generate()
         self._occupant: Optional[Placeable] = None
-        self.occupant = occupant
         # Initialize internal storage to avoid AttributeError before setters run
         self._north: Square | None = None
         self._south: Square | None = None
@@ -43,6 +42,8 @@ class Square:
         self.south = south
         self.east = east
         self.west = west    
+        self.occupant = occupant
+
 
     @property
     def occupant(self) -> Placeable | None:
