@@ -12,10 +12,10 @@ License: MIT
 
 from typing import Protocol, runtime_checkable
 
-from backend.src.interfaces.game_object import GameObject
+from src.interfaces.game_object import GameObject
 
 @runtime_checkable
-class Placeable(GameObject, Protocol):
+class Placeable(Protocol):
     """
     The Placeable protocol defines the interface for any object that can 
     occupy a Square in the game world.

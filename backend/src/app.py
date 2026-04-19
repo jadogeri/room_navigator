@@ -1,25 +1,24 @@
 from flask import Flask
-from backend.src.extensions import db
+from extensions import db
+from routes.player_routes import player_bp
 from dotenv import load_dotenv
 import os
 
+load_dotenv();
+
 def create_app():
-    app: Flask = Flask(__name__)
-
-    # 1. Config (Must be set BEFORE db.init_app)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///game.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['RESTX_MASK_SWAGGER'] = False
-    # Link to a popular dark theme for Swagger
 
-    # 2. Initialize Extensions
     db.init_app(app)
 
+    with app.app_context():
+        # Imports here to avoid circular dependencies
+        from models.actors.player import Player
+        db.create_all()
 
-
-    # 5. Register Blueprint with the URL prefix
-    app.register_blueprint(app, url_prefix='/api/v1')
-
+    app.register_blueprint(player_bp)
     return app
 
 if __name__ == '__main__':
@@ -34,3 +33,6 @@ if __name__ == '__main__':
 
     # 3. Pass the port to the run method
     app.run(debug=True, port=port)
+
+
+

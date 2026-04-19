@@ -6,7 +6,7 @@ from src.interfaces.base_actor import Actor
 from src.models.world.square import Square
 from src.schemas.interaction import InteractionResult
 
-class Player(db.Model, Actor):
+class Player(db.Model):
     """
     Concrete Player class that implements the Actor interface,
     the GameObject interface, and functions as a SQLAlchemy model.
