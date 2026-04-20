@@ -3,8 +3,6 @@ from typing import Optional
 
 from src.entities.world.square import Square
 
-# [Your Square Class implementation goes here]
-
 class TestSquare(unittest.TestCase):
     
     def setUp(self):

@@ -6,7 +6,7 @@ Description: Represents a square in the game world, which can hold an occupant
 
 Author: Joseph Adogeri
 Version: 1.0.0
-Since: 2023-10-27
+Since: 2026-04-19
 File: square.py
 License: MIT
 """
