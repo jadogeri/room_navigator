@@ -1,43 +1,28 @@
-from src.app import create_app
-
+import os
+from app import create_app
+from dotenv import load_dotenv
 
 def main():
-    print("Welcome to the Haunted House Game!")
-    print("This is just a placeholder for the main game loop.")
-    print("Run the tests to verify functionality.")
-    create_app();
+    # 1. Load environment variables
+    # This assumes .env is in the same folder as main.py
+    load_dotenv(override=True)
 
-if __name__ == "__main__":
-    main();
+    # 2. Initialize the app
+    app = create_app()
 
+    # 3. Get configuration from .env
+    port = int(os.getenv('FLASK_RUN_PORT', 5000))
+    debug_mode = os.getenv('FLASK_DEBUG', 'True').lower() == 'true'
 
+    print(f"--- Haunted House API Starting ---")
+    print(f"Port: {port}")
+    print(f"Database: game.db")
+    
+    # 4. Run the app
+    app.run(debug=debug_mode, port=port)
 
-
-
-
-
-
-
-
-
-
-
-
-
+if __name__ == '__main__':
+    main()
 
 
 
-
-
-
-
-
-
-
-
-from app import create_app
-
-app = create_app()
-
-if __name__ == "__main__":
-    app.run(debug=True)
