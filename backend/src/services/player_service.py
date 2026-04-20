@@ -1,40 +1,75 @@
+
 """
 Player Service Module
 ---------------------
-Description: Business logic handling pure PlayerEntity objects.
+Description: Bridges pure PlayerEntity logic with the PlayerRepository.
 
 Author: Joseph Adogeri
 Version: 1.0.0
-Since: 2026-APR-19
+Since: 2024-05-20
 File: player_service.py
 License: MIT
 """
 from __future__ import annotations
+from backend.src.repositories.base_repository import BaseRepository
 from src.repositories.player_repository import PlayerRepository
-from src.entities.actors.player import PlayerEntity
+from src.models.player_model import PlayerModel
+from src.entities.actors.player import Player
+from nanoid import generate
 
 class PlayerService:
     def __init__(self):
-        self.repository = PlayerRepository()
+        
+        self.repository: BaseRepository = PlayerRepository()
 
-    def create_player(self, entity: PlayerEntity) -> PlayerEntity:
-        # Save to DB via repository
-        saved_model = self.repository.save(entity)
-        entity.id = saved_model.id
-        return entity
+    def create_player(self, entity: Player) -> Player:
+        # 1. Assign ID if missing
+        if not entity.id:
+            entity.id = generate()
+        
+        # 2. Map Entity -> Model for database
+        model = PlayerModel(
+            id=entity.id,
+            name=entity.name,
+            health=entity.health,
+            speed=entity.speed,
+            damage=entity.damage
+        )
+        saved_entity = self.repository.save(model)
+        return saved_entity
+    
+    def get_all_players(self) -> list[Player]:
+        models = self.repository.get_all()
+        return [
+            Player(
+                id=m.id,
+                name=m.name,
+                health=m.health,
+                speed=m.speed,
+                damage=m.damage
+            ) for m in models
+        ]
 
-    def get_all_players(self) -> list[PlayerEntity]:
-        return self.repository.get_all()
-
-    def get_player_by_id(self, player_id: str) -> PlayerEntity | None:
-        return self.repository.get_one(player_id)
+    def get_player_by_id(self, player_id: str) -> Player | None:
+        model = self.repository.get_one(player_id)
+        if not model:
+            return None
+            
+        # 3. Map Model -> Entity for business logic
+        return Player(
+            id=model.id,
+            name=model.name,
+            health=model.health,
+            speed=model.speed,
+            damage=model.damage
+        )
 
     def update_player(self, player_id: str, data: dict) -> bool:
-        player = self.repository.get_one(player_id)
-        if player:
-            player.name = data.get('name', player.name)
-            player.health = data.get('health', player.health)
-            self.repository.save(player)
+        model = self.repository.get_one(player_id)
+        if model:
+            model.name = data.get('name', model.name)
+            model.health = data.get('health', model.health)
+            self.repository.save(model)
             return True
         return False
 

@@ -10,12 +10,9 @@ File: placeable.py
 License: MIT
 """
 
-from typing import Protocol, runtime_checkable
-
-from src.interfaces.game_object import GameObject
-
-@runtime_checkable
-class Placeable(Protocol):
+from abc import ABC
+    
+class Placeable(ABC):
     """
     The Placeable protocol defines the interface for any object that can 
     occupy a Square in the game world.
@@ -35,4 +32,4 @@ class Placeable(Protocol):
             str: The flavor text shown when the player explicitly 
                  inspects the object.
         """
-        ...
+        pass

@@ -17,11 +17,11 @@ def create_app():
     db.init_app(app)
 
     with app.app_context():
-        from models.actors.player import Player
+        from src.models.player_model import PlayerModel
         db.create_all()
 
     # Registered with your api/v1 prefix
-    app.register_blueprint(player_bp, url_prefix='/api/v1')
+    app.register_blueprint(player_bp, url_prefix='/api/v1/players')
     
     return app
 

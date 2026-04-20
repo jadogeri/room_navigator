@@ -3,8 +3,10 @@ from abc import ABC, abstractmethod
 
 from nanoid import generate
 
+from src.interfaces.placeable import Placeable
 
-class GameObject(ABC):
+
+class GameObject(Placeable, ABC):
     def __init__(self):
         # Generate 10-character ID
         self.id = generate(size=10) 

@@ -14,11 +14,12 @@ from abc import ABC, abstractmethod
 from typing import Optional
 
 from src.interfaces.game_object import GameObject
-from src.models.world.square import Square
+from src.entities.world.square import Square
 from src.schemas.interaction import InteractionResult
 
 class Actor(GameObject, ABC):
     def __init__(self, name: str, health: int, speed: int, damage: int):
+        super().__init__()
         self.name = name
         self.health = health
         self.speed = speed
@@ -40,8 +41,7 @@ class Actor(GameObject, ABC):
         ...
 
     @abstractmethod
-    def move(self, current_square: Square) -> Square | None: 
-        
+    def move(self, current_square: Square) -> Square | None:         
         pass
 
     # Concrete method to check if square is occupied

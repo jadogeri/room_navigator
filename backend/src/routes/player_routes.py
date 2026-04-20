@@ -13,13 +13,13 @@ License: MIT
 from flask import Blueprint
 from src.controllers.player_controller import PlayerController
 
-player_bp = Blueprint('player_routes', __name__, url_prefix='/players')
+player_bp = Blueprint('player_routes', __name__)
 pc = PlayerController()
 
-@player_bp.route('/', methods=['POST'])
+@player_bp.route('', methods=['POST'])
 def create_player(): return pc.create()
 
-@player_bp.route('/', methods=['GET'])
+@player_bp.route('', methods=['GET'])
 def get_players(): return pc.list_all()
 
 @player_bp.route('/<string:id>', methods=['GET'])

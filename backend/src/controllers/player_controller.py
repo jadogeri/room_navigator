@@ -11,7 +11,7 @@ License: MIT
 """
 from flask import jsonify, request, abort
 from src.services.player_service import PlayerService
-from src.entities.actors.player import PlayerEntity
+from src.entities.actors.player import Player
 
 
 class PlayerController:
@@ -21,7 +21,7 @@ class PlayerController:
     def create(self):
         data = request.json
         # Use the pure PlayerEntity class
-        new_player = PlayerEntity(
+        new_player = Player(
             name=data['name'],
             health=data.get('health', 100),
             speed=data.get('speed', 10),
