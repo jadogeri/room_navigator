@@ -11,7 +11,7 @@ class Player(db.Model):
     Concrete Player class that implements the Actor interface,
     the GameObject interface, and functions as a SQLAlchemy model.
     """
-    __tablename__ = 'players'
+    __tablename__ = 'players1'
     
     # 1. Database Columns (also satisfies GameObject 'id' requirement)
     id = db.Column(db.String(10), primary_key=True, default=lambda: generate(size=10))

@@ -11,7 +11,7 @@ File: player_repository.py
 License: MIT
 """
 from __future__ import annotations
-from backend.src.models.actors.player_model import PlayerModel
+from src.models.actors.player_model import PlayerModel
 from src.repositories.base_repository import BaseRepository
 
 class PlayerRepository(BaseRepository[PlayerModel]):
