@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 /**  ROUTES -- AUTHFLOW **/
 import Foyer from "./pages/Foyer";
 import Kitchen from "./pages/Kitchen";
-import Bedroom from "./pages/Bedroom";	
+import Bedroom from "./pages/BedRoom";	
 import Library from "./pages/Library";
 import DiningRoom from "./pages/DiningRoom";
 import Basement from "./pages/Basement";	
