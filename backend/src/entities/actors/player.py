@@ -15,12 +15,8 @@ from src.interfaces.base_actor import Actor
 
 
 class Player(Actor):
-    def __init__(self, name, health=100, speed=10, damage=5, id=None):
-        super().__init__(name, health, speed, damage)
-        self.name = name
-        self.health = health
-        self.speed = speed
-        self.damage = damage
+    def __init__(self, name, health=100, speed=10, damage=5, id: str | None = None):
+        super().__init__(name, health, speed, damage, id)
 
     def get_info(self):
         return f"Player {self.name}: HP={self.health}, Speed={self.speed}, Damage={self.damage}"
@@ -30,8 +26,16 @@ class Player(Actor):
 
 
     def __repr__(self):
-        return f"<Player {self.name} ID={self.id}>"
-
+        return f"<Player {self.name} ID={self.id}> HP={self.health} Speed={self.speed} Damage={self.damage}>"
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "health": self.health,
+            "speed": self.speed,
+            "damage": self.damage
+        }
 
 
 

@@ -11,7 +11,7 @@ File: player_service.py
 License: MIT
 """
 from __future__ import annotations
-from backend.src.repositories.base_repository import BaseRepository
+from src.repositories.base_repository import BaseRepository
 from src.repositories.player_repository import PlayerRepository
 from src.models.player_model import PlayerModel
 from src.entities.actors.player import Player
@@ -20,7 +20,7 @@ from nanoid import generate
 class PlayerService:
     def __init__(self):
         
-        self.repository: BaseRepository = PlayerRepository()
+        self.repository: PlayerRepository = PlayerRepository()
 
     def create_player(self, entity: Player) -> Player:
         # 1. Assign ID if missing
@@ -28,18 +28,18 @@ class PlayerService:
             entity.id = generate()
         
         # 2. Map Entity -> Model for database
-        model = PlayerModel(
+        model: PlayerModel = PlayerModel(
             id=entity.id,
             name=entity.name,
             health=entity.health,
             speed=entity.speed,
             damage=entity.damage
         )
-        saved_entity = self.repository.save(model)
+        saved_entity: Player = self.repository.save(model)
         return saved_entity
     
     def get_all_players(self) -> list[Player]:
-        models = self.repository.get_all()
+        models: list[PlayerModel] = self.repository.get_all()
         return [
             Player(
                 id=m.id,
@@ -51,10 +51,10 @@ class PlayerService:
         ]
 
     def get_player_by_id(self, player_id: str) -> Player | None:
-        model = self.repository.get_one(player_id)
+        model: PlayerModel | None = self.repository.get_one(player_id)
         if not model:
             return None
-            
+        
         # 3. Map Model -> Entity for business logic
         return Player(
             id=model.id,
@@ -62,7 +62,7 @@ class PlayerService:
             health=model.health,
             speed=model.speed,
             damage=model.damage
-        )
+        )  
 
     def update_player(self, player_id: str, data: dict) -> bool:
         model = self.repository.get_one(player_id)

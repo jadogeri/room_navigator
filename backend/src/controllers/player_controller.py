@@ -21,24 +21,24 @@ class PlayerController:
     def create(self):
         data = request.json
         # Use the pure PlayerEntity class
-        new_player = Player(
+        new_player: Player = Player(
             name=data['name'],
             health=data.get('health', 100),
             speed=data.get('speed', 10),
             damage=data.get('damage', 5)
         )
-        saved = self.service.create_player(new_player)
+        saved: Player = self.service.create_player(new_player)
         return jsonify({"id": saved.id, "message": "Player created"}), 201
 
     def list_all(self):
-        players = self.service.get_all_players()
-        return jsonify([{"id": p.id, "name": p.name} for p in players]), 200
+        players: list[Player] = self.service.get_all_players()
+        return jsonify([p.to_dict() for p in players]), 200
 
     def get_one(self, id: str):
-        player = self.service.get_player_by_id(id)
+        player: Player | None = self.service.get_player_by_id(id)
         if not player:
             abort(404)
-        return jsonify({"id": player.id, "name": player.name, "health": player.health}), 200
+        return jsonify(player.to_dict()), 200
 
     def update(self, id: str):
         if self.service.update_player(id, request.json):

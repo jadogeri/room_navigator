@@ -1,4 +1,3 @@
-
 """
 Player Model Module
 -------------------
@@ -10,17 +9,19 @@ Since: 2024-05-20
 File: player_model.py
 License: MIT
 """
+from __future__ import annotations
 from extensions import db
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String, Integer
 
 class PlayerModel(db.Model):
-    __tablename__ = 'players'
+    __tablename__ = "players"
 
-    # ID is a string to support nanoid or UUIDs if needed
-    id: str = db.Column(db.String(36), primary_key=True)
-    name: str = db.Column(db.String(80), nullable=False)
-    health: int = db.Column(db.Integer, default=100)
-    speed: int = db.Column(db.Integer, default=10)
-    damage: int = db.Column(db.Integer, default=5)
+    id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    name: Mapped[str] = mapped_column(String(80), nullable=False)
+    health: Mapped[int] = mapped_column(Integer, default=100)
+    speed: Mapped[int] = mapped_column(Integer, default=10)
+    damage: Mapped[int] = mapped_column(Integer, default=5)
 
     def __repr__(self) -> str:
-        return f'<PlayerModel {self.name}>'
+        return f"<PlayerModel {self.name}>"

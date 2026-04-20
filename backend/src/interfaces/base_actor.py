@@ -18,8 +18,8 @@ from src.entities.world.square import Square
 from src.schemas.interaction import InteractionResult
 
 class Actor(GameObject, ABC):
-    def __init__(self, name: str, health: int, speed: int, damage: int):
-        super().__init__()
+    def __init__(self, name: str, health: int, speed: int, damage: int, id: str | None = None):
+        super().__init__(id)
         self.name = name
         self.health = health
         self.speed = speed
