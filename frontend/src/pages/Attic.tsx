@@ -1,9 +1,14 @@
-import React from 'react'
 
-const Attic = () => {
-  return (
-    <div>Attic</div>
-  )
-}
+// pages/Attic.tsx
+import Board from "../components/Board";
+const Attic = (props: any) => (
+    <div>
 
-export default Attic
+<div><h1>The Attic</h1><p>Eyes watch you from the doll crates.</p></div>
+
+
+        <Board {...props} width={40} height={15} spawnPos={{ x: 4, y: 1 }}
+            doors={[{ x: 4, y: 2, target: "/mirrors" }]} />
+    </div>
+);
+export default Attic;

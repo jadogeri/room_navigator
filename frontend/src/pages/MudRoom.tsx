@@ -1,15 +1,16 @@
 
 
-// pages/Solarium.tsx
+// pages/MudRoom.tsx
 import Board from "../components/Board";
-const Solarium = (props: any) => (
+const MudRoom  = (props: any) => (
     <div>
 
-<div><h1>The Solarium</h1><p>The vines are twitching.</p></div>
+
+<div><h1>The Mudroom</h1><p>The air is thick with the scent of wet earth and ancient rain.</p></div>
 
   <Board {...props} width={20} height={20} spawnPos={{ x: 2, y: 1 }}
     doors={[{ x: 2, y: 0, target: "/portraitgallery" }]} />
     </div>
 
 );
-export default Solarium;
+export default MudRoom;
